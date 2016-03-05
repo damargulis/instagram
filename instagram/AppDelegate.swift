@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if PFUser.currentUser() != nil {
             self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-            let viewController = storyBoard.instantiateViewControllerWithIdentifier("Home") as! HomeViewController
+            let viewController = storyBoard.instantiateViewControllerWithIdentifier("NavBase") as! UITabBarController
             self.window?.rootViewController = viewController
             self.window?.makeKeyAndVisible()
             

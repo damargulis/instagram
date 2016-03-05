@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class HomeViewController: UIViewController {
 
@@ -22,6 +23,13 @@ class HomeViewController: UIViewController {
     }
     
 
+    @IBAction func onLogout(sender: AnyObject) {
+        PFUser.logOut()
+        self.dismissViewControllerAnimated(true) { () -> Void in
+            print("hi")
+        }
+        
+    }
     /*
     // MARK: - Navigation
 
