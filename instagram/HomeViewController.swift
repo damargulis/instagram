@@ -8,13 +8,40 @@
 
 import UIKit
 import Parse
+import ParseUI
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    
+    var Posts: [PFObject]!
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tableView.delegate = self
+        tableView.dataSource = self
         // Do any additional setup after loading the view.
+        
+        let query = PFQuery(className: "Post")
+        query.orderByDescending("createdAt")
+        query.includeKey("author")
+        query.limit = 20
+        
+        query.findObjectsInBackgroundWithBlock { (posts: [PFObject]?, error: NSError?) -> Void in
+            if let posts = posts{
+                self.Posts = posts
+                print("got posts")
+                print(self.Posts.count)
+                self.tableView.reloadData()
+            } else{
+                print("failed to get posts")
+                print(error?.localizedDescription)
+            }
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,14 +49,34 @@ class HomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    @IBAction func onLogout(sender: AnyObject) {
-        PFUser.logOut()
-        self.dismissViewControllerAnimated(true) { () -> Void in
-            print("hi")
-        }
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("PostCell") as! PostTableViewCell
+        let post = Posts[indexPath.row]
         
+        print("loading \(indexPath.row)")
+        
+        cell.captionLabel.text = post["caption"] as? String
+        
+        cell.postImageView.file = post["media"] as? PFFile
+        cell.postImageView.loadInBackground()
+        
+        
+        
+        
+        return cell
     }
+
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let Posts = Posts{
+            print("returning \(Posts.count)")
+            return Posts.count
+        } else{
+            print("returning none")
+            return 0
+        }
+    }
+    
+    
     /*
     // MARK: - Navigation
 

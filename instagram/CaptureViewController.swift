@@ -51,7 +51,7 @@ class CaptureViewController: UIViewController, UINavigationControllerDelegate, U
     }
     
     @IBAction func onSubmit(sender: AnyObject) {
-        let postImage = resize(pictureImageView.image!, newSize: CGSizeMake(10, 10))
+        let postImage = resize(pictureImageView.image!, newSize: CGSizeMake(1000, 1000))
         
         Post.postUserImage(postImage, withCaption: captionField.text, withCompletion: nil)
         
