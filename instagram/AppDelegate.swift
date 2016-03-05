@@ -26,6 +26,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             })
         )
         
+        if PFUser.currentUser() != nil {
+            self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            let viewController = storyBoard.instantiateViewControllerWithIdentifier("Home") as! HomeViewController
+            self.window?.rootViewController = viewController
+            self.window?.makeKeyAndVisible()
+            
+        }
+        
         return true
     }
 

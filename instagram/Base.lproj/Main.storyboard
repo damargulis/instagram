@@ -54,10 +54,10 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
-        <!--View Controller-->
+        <!--Home View Controller-->
         <scene sceneID="P8U-nu-UW4">
             <objects>
-                <viewController id="h8K-BJ-FKo" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Home" id="h8K-BJ-FKo" customClass="HomeViewController" customModule="instagram" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RiP-SW-FW9"/>
                         <viewControllerLayoutGuide type="bottom" id="RIY-Bd-chk"/>
@@ -65,13 +65,19 @@
                     <view key="view" contentMode="scaleToFill" id="tIe-Jx-Ygc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aMW-dx-ZHL">
+                                <rect key="frame" x="20" y="28" width="48" height="30"/>
+                                <state key="normal" title="Logout"/>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nfh-59-B9K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="661" y="240"/>
+            <point key="canvasLocation" x="773" y="240"/>
         </scene>
     </scenes>
 </document>
