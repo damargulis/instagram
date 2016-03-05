@@ -15,9 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        
         Parse.initializeWithConfiguration(
             ParseClientConfiguration(block: { (configuration:ParseMutableClientConfiguration) -> Void in
                 configuration.applicationId = "Instagram"
@@ -25,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 configuration.server = "https://dry-savannah-27248.herokuapp.com/parse"
             })
         )
-        
+
         if PFUser.currentUser() != nil {
             self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)

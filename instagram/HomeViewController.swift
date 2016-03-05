@@ -77,6 +77,28 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
+    func redo(){
+        
+        let query = PFQuery(className: "Post")
+        query.orderByDescending("createdAt")
+        query.includeKey("author")
+        query.limit = 20
+        
+        query.findObjectsInBackgroundWithBlock { (posts: [PFObject]?, error: NSError?) -> Void in
+            if let posts = posts{
+                self.Posts = posts
+                print("got posts")
+                print(self.Posts.count)
+                self.tableView.reloadData()
+            } else{
+                print("failed to get posts")
+                print(error?.localizedDescription)
+            }
+        }
+
+        
+    }
+    
     /*
     // MARK: - Navigation
 

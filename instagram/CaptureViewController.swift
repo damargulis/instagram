@@ -51,13 +51,27 @@ class CaptureViewController: UIViewController, UINavigationControllerDelegate, U
     }
     
     @IBAction func onSubmit(sender: AnyObject) {
-        let postImage = resize(pictureImageView.image!, newSize: CGSizeMake(1000, 1000))
-        
-        Post.postUserImage(postImage, withCaption: captionField.text, withCompletion: nil)
-        
-        pictureImageView.image = nil
-        captionField.text = ""
-        tabBarController?.selectedIndex = 1
+        if(pictureImageView.image != nil){
+            let postImage = resize(pictureImageView.image!, newSize: CGSizeMake(1000, 1000))
+            
+            Post.postUserImage(postImage, withCaption: captionField.text, withCompletion: { (success: Bool, error: NSError?) -> Void in
+                if(success){
+                    
+                    self.pictureImageView.image = nil
+                    self.captionField.text = ""
+                    
+                    let homeTab = self.tabBarController?.viewControllers![0] as! HomeViewController
+                    
+                    homeTab.redo()
+                    
+                    self.tabBarController?.selectedIndex = 0
+                } else{
+                    print("failed to post picture")
+                    print(error?.localizedDescription)
+                }
+            })
+            
+        }
     }
     
     func resize(image: UIImage, newSize: CGSize) -> UIImage {
